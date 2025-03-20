@@ -1,47 +1,36 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import SwatchClock from './components/SwatchClock.vue';
+import { onMounted, onUnmounted, ref } from 'vue';
+import { minutesPerSwatch } from '@/util';
+import { DateTime } from 'luxon';
+
+const interval = ref<number | null>(null);
+const time = ref<DateTime>(DateTime.now());
+
+onMounted(() => {
+  interval.value = setInterval(() => {
+    time.value = DateTime.now();
+  }, minutesPerSwatch / 100);
+});
+
+onUnmounted(() => {
+  if (interval.value) {
+    clearInterval(interval.value);
+    interval.value = null;
+  }
+});
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
   <main>
-    <TheWelcome />
+    <SwatchClock :time="time" />
   </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+main {
+  width: 100vmin;
+  height: 100vmin;
+  margin: auto;
 }
 </style>
