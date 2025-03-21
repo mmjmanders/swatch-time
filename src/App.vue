@@ -4,26 +4,36 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import { minutesPerSwatch } from '@/util';
 import { DateTime } from 'luxon';
 
-const interval = ref<number | null>(null);
-const time = ref<DateTime>(DateTime.now());
+const swatchInterval = ref<number | null>(null);
+const swatch = ref<DateTime>(DateTime.now());
+
+const localTimeInterval = ref<number | null>(null);
+const localTime = ref<DateTime>(DateTime.now());
 
 onMounted(() => {
-  interval.value = setInterval(() => {
-    time.value = DateTime.now();
+  swatchInterval.value = setInterval(() => {
+    swatch.value = DateTime.now();
   }, minutesPerSwatch / 100);
+  localTimeInterval.value = setInterval(() => {
+    localTime.value = DateTime.now();
+  }, 1000);
 });
 
 onUnmounted(() => {
-  if (interval.value) {
-    clearInterval(interval.value);
-    interval.value = null;
+  if (swatchInterval.value) {
+    clearInterval(swatchInterval.value);
+    swatchInterval.value = null;
+  }
+  if (localTimeInterval.value) {
+    clearInterval(localTimeInterval.value);
+    localTimeInterval.value = null;
   }
 });
 </script>
 
 <template>
   <main>
-    <SwatchClock :time="time" />
+    <SwatchClock :time="swatch" :local-time="localTime" />
   </main>
 </template>
 
