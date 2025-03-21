@@ -1,7 +1,6 @@
 :root {
   --st-bg-color: var(--bs-body-bg);
   --st-text-color: var(--bs-body-color);
-
 }
 
 @media (prefers-color-scheme: dark) {
