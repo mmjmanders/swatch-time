@@ -7,7 +7,7 @@ on:
       - '.github/workflows/pages.yml'
       - 'src/**'
       - 'public/**'
-      - '!**/*.spec.ts'
+      - 'index.html'
 
 jobs:
   pnpm_install:
