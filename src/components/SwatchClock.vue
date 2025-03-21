@@ -24,8 +24,8 @@ const { VITE_BUILD_SHA: version } = import.meta.env;
     <defs>
       <path id="marker" d="M -2.5,-490 l 5,0 0,40 -5,0 z" />
       <g id="clock-hand">
-        <path d="M -5,30 l 10,0 0,-505 -10,0 z" fill="black" />
-        <circle cx="0" cy="0" r="15" fill="black" />
+        <path d="M -5,30 l 10,0 0,-505 -10,0 z" />
+        <circle cx="0" cy="0" r="15" />
       </g>
       <path id="second-hand" d="M -1,45 l 2,0 0,-510 -2,0 z" fill="red" />
     </defs>
@@ -49,16 +49,4 @@ const { VITE_BUILD_SHA: version } = import.meta.env;
   </svg>
 </template>
 
-<style scoped>
-.time {
-  font-size: 4rem;
-}
-
-.small {
-  font-size: 2.5rem;
-}
-
-.version {
-  font-size: 1.5rem;
-}
-</style>
+<style scoped></style>

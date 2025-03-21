@@ -1,5 +1,39 @@
+:root {
+  --st-bg-color: var(--bs-body-bg);
+  --st-text-color: var(--bs-body-color);
 
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --st-bg-color: var(--bs-body-color);
+    --st-text-color: var(--bs-body-bg);
+  }
+}
+
+body {
+  background-color: var(--st-bg-color);
+}
 
 text {
   font-family: 'Roboto Mono', monospace;
+  fill: var(--st-text-color);
+}
+
+#marker,
+#clock-hand path,
+#clock-hand circle {
+  fill: var(--st-text-color);
+}
+
+.time {
+  font-size: 4rem;
+}
+
+.small {
+  font-size: 2.5rem;
+}
+
+.version {
+  font-size: 1.5rem;
 }
