@@ -12,9 +12,10 @@ const markers = ref<number[]>(
     .filter((_, i) => i % 20 === 0),
 );
 
-const props = defineProps<{ time: DateTime }>();
+const props = defineProps<{ time: DateTime; localTime: DateTime }>();
 
 const swatchTime = computed(() => calculateSwatch(props.time).toFixed(2));
+const localTimeDisplay = computed(() => props.localTime.toFormat('H:mm:ss'));
 const { VITE_BUILD_SHA: version } = import.meta.env;
 </script>
 
@@ -23,14 +24,15 @@ const { VITE_BUILD_SHA: version } = import.meta.env;
     <defs>
       <path id="marker" d="M -2.5,-490 l 5,0 0,40 -5,0 z" />
       <g id="clock-hand">
-        <path d="M -5,30 l 10,0 0,-505 -10,0 z" fill="red" />
-        <circle cx="0" cy="0" r="15" fill="red" />
+        <path d="M -5,30 l 10,0 0,-505 -10,0 z" fill="black" />
+        <circle cx="0" cy="0" r="15" fill="black" />
       </g>
-      <path id="second-hand" d="M -1,45 l 2,0 0,-510 -2,0 z" fill="black" />
+      <path id="second-hand" d="M -1,45 l 2,0 0,-510 -2,0 z" fill="red" />
     </defs>
     <g>
-      <text class="time" x="0" y="250" text-anchor="middle">{{ swatchTime }}</text>
-      <text class="version" x="0" y="300" text-anchor="middle">{{ version }}</text>
+      <text class="time" x="0" y="225" text-anchor="middle">{{ swatchTime }}</text>
+      <text class="time small" x="0" y="300" text-anchor="middle">{{ localTimeDisplay }}</text>
+      <text class="version" x="0" y="340" text-anchor="middle">{{ version }}</text>
     </g>
     <g>
       <use
@@ -52,7 +54,11 @@ const { VITE_BUILD_SHA: version } = import.meta.env;
   font-size: 4rem;
 }
 
+.small {
+  font-size: 2.5rem;
+}
+
 .version {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 </style>
